@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
     def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 4)
     end
     
     def show
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
     def create
        @article = Article.new(article_params)
        if @article.save
-           flash[:sucess] = "Your article save sucessfully"
+           flash[:success] = "Your article save sucessfully"
            redirect_to article_path(@article)
        else
            render 'new'
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
     def update
        @article = Article.find(params[:id])
        if @article.update(article_params)
-           flash[:sucess] = "Your article have sucessfully updated"
+           flash[:success] = "Your article have sucessfully updated"
            redirect_to article_path(@article)
        else
            render 'edit'
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
     def destroy
        @article =Article.find(params[:id])
        @article.destroy
-       flash[:sucess] = "Your article has been deleted"
+       flash[:success] = "Your article has been deleted"
        redirect_to articles_path
     end
     

@@ -1,4 +1,15 @@
-<h1><%= @article.name %></h1>
-<h1><%= @article.description %></h1>
 
-<%= link_to "Back to Articles", articles_path %>
+           <h2 align="center">Title: <%= @article.name %></h2>
+    <ul>
+        <div class="well col-md-offset-2 col-md-8">
+        <strong>Description: </strong></br> <%= @article.description %>  </br>
+        <small>
+           <%= time_ago_in_words(@article.created_at) %> ago
+        </small> </br>
+        <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-sm btn-primary" %>
+        <%= link_to "Delete Article", article_path(@article),
+                              method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger"  %>
+        </div>
+    </ul>
+
+

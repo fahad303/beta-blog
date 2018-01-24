@@ -1,11 +1,21 @@
-<h1>All Articles</h1>
+<h1 align="center">All Articles</h1>
+<div class="center">
+    <%= will_paginate %>
+</div>
+
 <% @articles.each do |article| %>
     <ul>
-        <li><%= article.name %></li>  
-        <%= link_to "Show", article_path(article) %>
-        <%= link_to "Edit", edit_article_path(article) %>
-        <%= link_to "Delete", article_path(article),
-                              method: :delete, data: {confirm: "Are you sure"} %>
+        <div class="well col-md-offset-2 col-md-8">
+        <%= article.name %> </br>
+        <%= truncate(article.description, length: 100) %>  </br>
+        <small>
+            <%= time_ago_in_words(article.created_at) %> ago
+        </small> </br>
+        <%= link_to "Show Articles", article_path(article), class: "btn btn-sm btn-default" %>
+        <%= link_to "Edit Article", edit_article_path(article), class: "btn btn-sm btn-primary" %>
+        <%= link_to "Delete Article", article_path(article),
+                              method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger"  %>
+        </div>
     </ul>
 <% end %>
-<li><%= link_to "New Article", new_article_path %></li>
+
